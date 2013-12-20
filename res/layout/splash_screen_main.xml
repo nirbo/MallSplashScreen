@@ -1,0 +1,174 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:background="@color/SplashBackground" >
+
+    <TableLayout
+        android:id="@+id/mainTableLayout"
+        android:padding="5dp"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_gravity="center_vertical|center_horizontal" >
+	    
+        <TableRow 
+            android:id="@+id/logoTableRow"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal" >
+            
+            <ImageView 
+                android:id="@+id/logoImageView" 
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_gravity="center_vertical|center_horizontal" >
+            </ImageView>
+        </TableRow>
+
+        <TableRow 
+            android:id="@+id/messagesTableRow"
+            android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:gravity="center_vertical|center_horizontal" 
+            android:background="@color/SplashMessageBackground"
+            android:layout_weight="1" >
+            
+            <TableLayout 
+                android:id="@+id/messagesInnerTableLayout"
+                android:layout_width="match_parent"
+				android:layout_height="match_parent" >
+                
+                <TableRow 
+                    android:id="@+id/messageInnerTableRow0"
+                    android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center_vertical|center_horizontal"
+					android:padding="15dp" >
+                	
+                    <TextView 
+		                android:id="@+id/messageTextView0"
+		                android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:gravity="center_vertical|center_horizontal"
+						android:textSize="16sp"
+						android:text="@string/placeholder1"
+						android:textColor="@color/Black" >
+		            </TextView>
+                </TableRow>
+                
+	            
+	            <TableRow 
+                    android:id="@+id/messageInnerTableRow1"
+                    android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center_vertical|center_horizontal"
+					android:padding="15dp" >
+                	
+                    <TextView 
+		                android:id="@+id/messageTextView1"
+		                android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:gravity="center_vertical|center_horizontal"
+						android:textSize="16sp"
+						android:text="@string/placeholder2"
+						android:textColor="@color/Black" >
+		            </TextView>
+                </TableRow>
+	            
+	            <TableRow 
+                    android:id="@+id/messageInnerTableRow2"
+                    android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center_vertical|center_horizontal"
+					android:padding="15dp" >
+                	
+                    <TextView 
+		                android:id="@+id/messageTextView2"
+		                android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:gravity="center_vertical|center_horizontal"
+						android:textSize="16sp"
+						android:text="@string/placeholder3"
+						android:textColor="@color/Black" >
+		            </TextView>
+                </TableRow>
+	            
+	            <TableRow 
+                    android:id="@+id/messageInnerTableRow3"
+                    android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center_vertical|center_horizontal"
+					android:padding="15dp" >
+                	
+                    <TextView 
+		                android:id="@+id/messageTextView3"
+		                android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:gravity="center_vertical|center_horizontal"
+						android:textSize="16sp"
+						android:text="@string/placeholder4"
+						android:textColor="@color/Black" >
+		            </TextView>
+                </TableRow>
+	            
+	            <TableRow 
+                    android:id="@+id/messageInnerTableRow4"
+                    android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center_vertical|center_horizontal"
+					android:padding="15dp" >
+                	
+                    <TextView 
+		                android:id="@+id/messageTextView4"
+		                android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:gravity="center_vertical|center_horizontal"
+						android:textSize="16sp"
+						android:text="@string/placeholder5"
+						android:textColor="@color/Black" >
+		            </TextView>
+                </TableRow>
+            </TableLayout>            
+        </TableRow>
+        
+        <TableRow 
+            android:id="@+id/loadingCircleTableRow"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical|center_horizontal" >
+            
+            <ProgressBar
+                android:id="@+id/loadingCircleProgressBar" style="?android:attr/progressBarStyle"
+                android:visibility="invisible"
+                android:indeterminate="true"
+                android:indeterminateBehavior="cycle"
+	            android:layout_width="50dp" 
+	            android:layout_height="50dp"
+	            android:layout_gravity="bottom|center_horizontal" >
+            </ProgressBar>
+        </TableRow>
+        
+        <TableRow 
+			android:id="@+id/informationBarTableRow"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:gravity="center_vertical|center_horizontal" >
+            
+            <TextView 
+                android:id="@+id/informationBarTextView"
+                android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:gravity="bottom|center_horizontal"
+				android:textSize="16sp"
+				android:textStyle="bold"
+				android:textColor="@color/Black" >
+            </TextView>
+        </TableRow>
+        
+	</TableLayout>
+</LinearLayout>
