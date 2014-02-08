@@ -29,112 +29,76 @@
                 android:layout_gravity="center_vertical|center_horizontal" >
             </ImageView>
         </TableRow>
+         
+		<LinearLayout
+			android:id="@+id/messagesInnerLinearLayout"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:background="@color/SplashMessageBackground"
+			android:gravity="center_vertical|center_horizontal"
+			android:layout_weight="1" >
+			
+			<TextView 
+				android:id="@+id/messageTextView0"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="center_vertical|center_horizontal"
+				android:textSize="16sp"
+				android:text="@string/placeholder1"
+				android:textColor="@color/Black"
+				android:scrollHorizontally="false"
+				android:padding="5dp" >
+			</TextView>
+			
+               <TextView 
+				android:id="@+id/messageTextView1"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="center_vertical|center_horizontal"
+				android:textSize="16sp"
+				android:text="@string/placeholder2"
+				android:textColor="@color/Black"
+				android:scrollHorizontally="false"
+				android:padding="5dp" >
+			</TextView>
+           
+			<TextView 
+				android:id="@+id/messageTextView2"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="center_vertical|center_horizontal"
+				android:textSize="16sp"
+				android:text="@string/placeholder3"
+				android:textColor="@color/Black"
+				android:scrollHorizontally="false"
+				android:padding="5dp" >
+			</TextView>
 
-        <TableRow 
-            android:id="@+id/messagesTableRow"
-            android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:gravity="center_vertical|center_horizontal" 
-            android:background="@color/SplashMessageBackground"
-            android:layout_weight="1" >
-            
-            <TableLayout 
-                android:id="@+id/messagesInnerTableLayout"
-                android:layout_width="match_parent"
-				android:layout_height="match_parent" >
-                
-                <TableRow 
-                    android:id="@+id/messageInnerTableRow0"
-                    android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:gravity="center_vertical|center_horizontal"
-					android:padding="15dp" >
-                	
-                    <TextView 
-		                android:id="@+id/messageTextView0"
-		                android:layout_width="match_parent"
-						android:layout_height="match_parent"
-						android:gravity="center_vertical|center_horizontal"
-						android:textSize="16sp"
-						android:text="@string/placeholder1"
-						android:textColor="@color/Black" >
-		            </TextView>
-                </TableRow>
-                
-	            
-	            <TableRow 
-                    android:id="@+id/messageInnerTableRow1"
-                    android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:gravity="center_vertical|center_horizontal"
-					android:padding="15dp" >
-                	
-                    <TextView 
-		                android:id="@+id/messageTextView1"
-		                android:layout_width="match_parent"
-						android:layout_height="match_parent"
-						android:gravity="center_vertical|center_horizontal"
-						android:textSize="16sp"
-						android:text="@string/placeholder2"
-						android:textColor="@color/Black" >
-		            </TextView>
-                </TableRow>
-	            
-	            <TableRow 
-                    android:id="@+id/messageInnerTableRow2"
-                    android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:gravity="center_vertical|center_horizontal"
-					android:padding="15dp" >
-                	
-                    <TextView 
-		                android:id="@+id/messageTextView2"
-		                android:layout_width="match_parent"
-						android:layout_height="match_parent"
-						android:gravity="center_vertical|center_horizontal"
-						android:textSize="16sp"
-						android:text="@string/placeholder3"
-						android:textColor="@color/Black" >
-		            </TextView>
-                </TableRow>
-	            
-	            <TableRow 
-                    android:id="@+id/messageInnerTableRow3"
-                    android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:gravity="center_vertical|center_horizontal"
-					android:padding="15dp" >
-                	
-                    <TextView 
-		                android:id="@+id/messageTextView3"
-		                android:layout_width="match_parent"
-						android:layout_height="match_parent"
-						android:gravity="center_vertical|center_horizontal"
-						android:textSize="16sp"
-						android:text="@string/placeholder4"
-						android:textColor="@color/Black" >
-		            </TextView>
-                </TableRow>
-	            
-	            <TableRow 
-                    android:id="@+id/messageInnerTableRow4"
-                    android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:gravity="center_vertical|center_horizontal"
-					android:padding="15dp" >
-                	
-                    <TextView 
-		                android:id="@+id/messageTextView4"
-		                android:layout_width="match_parent"
-						android:layout_height="match_parent"
-						android:gravity="center_vertical|center_horizontal"
-						android:textSize="16sp"
-						android:text="@string/placeholder5"
-						android:textColor="@color/Black" >
-		            </TextView>
-                </TableRow>
-            </TableLayout>            
-        </TableRow>
+			<TextView 
+				android:id="@+id/messageTextView3"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="center_vertical|center_horizontal"
+				android:textSize="16sp"
+				android:text="@string/placeholder4"
+				android:textColor="@color/Black"
+				android:scrollHorizontally="false"
+				android:padding="5dp" >
+			</TextView>
+               	
+			<TextView 
+                android:id="@+id/messageTextView4"
+                android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="center_vertical|center_horizontal"
+				android:textSize="16sp"
+				android:text="@string/placeholder5"
+				android:textColor="@color/Black"
+				android:scrollHorizontally="false"
+				android:padding="5dp" >
+			</TextView>   
+		</LinearLayout>    
         
         <TableRow 
             android:id="@+id/loadingCircleTableRow"
