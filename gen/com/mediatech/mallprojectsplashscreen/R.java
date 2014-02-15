@@ -176,17 +176,17 @@ public final class R {
     public static final class id {
         public static final int action_settings=0x7f0a000d;
         public static final int informationBarTableRow=0x7f0a000b;
-        public static final int informationBarTextSwitcher=0x7f0a000c;
+        public static final int informationBarTextView=0x7f0a000c;
         public static final int loadingCircleProgressBar=0x7f0a000a;
         public static final int loadingCircleTableRow=0x7f0a0009;
         public static final int logoImageView=0x7f0a0002;
         public static final int logoTableRow=0x7f0a0001;
         public static final int mainTableLayout=0x7f0a0000;
-        public static final int messageTextSwitcher0=0x7f0a0004;
-        public static final int messageTextSwitcher1=0x7f0a0005;
-        public static final int messageTextSwitcher2=0x7f0a0006;
-        public static final int messageTextSwitcher3=0x7f0a0007;
-        public static final int messageTextSwitcher4=0x7f0a0008;
+        public static final int messageTextView0=0x7f0a0004;
+        public static final int messageTextView1=0x7f0a0005;
+        public static final int messageTextView2=0x7f0a0006;
+        public static final int messageTextView3=0x7f0a0007;
+        public static final int messageTextView4=0x7f0a0008;
         public static final int messagesInnerLinearLayout=0x7f0a0003;
     }
     public static final class layout {

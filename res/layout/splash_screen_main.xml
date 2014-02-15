@@ -39,65 +39,60 @@
 			android:gravity="center_vertical|center_horizontal"
 			android:layout_weight="1" >
 			
-			<TextSwitcher 
-				android:id="@+id/messageTextSwitcher0"
+			<TextView 
+				android:id="@+id/messageTextView0"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="center_vertical|center_horizontal"
-				android:textSize="16sp"
+				android:textSize="14sp"
 				android:text="@string/placeholder1"
 				android:textColor="@color/Black"
-				android:scrollHorizontally="false"
 				android:padding="5dp" >
-			</TextSwitcher>
+			</TextView>
 			
-               <TextSwitcher 
-				android:id="@+id/messageTextSwitcher1"
+               <TextView 
+				android:id="@+id/messageTextView1"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="center_vertical|center_horizontal"
-				android:textSize="16sp"
+				android:textSize="14sp"
 				android:text="@string/placeholder2"
 				android:textColor="@color/Black"
-				android:scrollHorizontally="false"
 				android:padding="5dp" >
-			</TextSwitcher>
+			</TextView>
            
-			<TextSwitcher 
-				android:id="@+id/messageTextSwitcher2"
+			<TextView 
+				android:id="@+id/messageTextView2"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="center_vertical|center_horizontal"
-				android:textSize="16sp"
+				android:textSize="14sp"
 				android:text="@string/placeholder3"
 				android:textColor="@color/Black"
-				android:scrollHorizontally="false"
 				android:padding="5dp" >
-			</TextSwitcher>
+			</TextView>
 
-			<TextSwitcher 
-				android:id="@+id/messageTextSwitcher3"
+			<TextView 
+				android:id="@+id/messageTextView3"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="center_vertical|center_horizontal"
-				android:textSize="16sp"
+				android:textSize="14sp"
 				android:text="@string/placeholder4"
 				android:textColor="@color/Black"
-				android:scrollHorizontally="false"
 				android:padding="5dp" >
-			</TextSwitcher>
+			</TextView>
                	
-			<TextSwitcher 
-                android:id="@+id/messageTextSwitcher4"
+			<TextView 
+                android:id="@+id/messageTextView4"
                 android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="center_vertical|center_horizontal"
-				android:textSize="16sp"
+				android:textSize="14sp"
 				android:text="@string/placeholder5"
 				android:textColor="@color/Black"
-				android:scrollHorizontally="false"
 				android:padding="5dp" >
-			</TextSwitcher>   
+			</TextView>   
 		</LinearLayout>    
         
         <TableRow 
@@ -123,11 +118,15 @@
 			android:layout_height="match_parent"
 			android:gravity="center_vertical|center_horizontal" >
             
-            <TextSwitcher 
-                android:id="@+id/informationBarTextSwitcher"
+            <TextView 
+                android:id="@+id/informationBarTextView"
                 android:layout_width="wrap_content"
-				android:layout_height="wrap_content" >
-            </TextSwitcher>
+				android:layout_height="wrap_content"
+				android:gravity="center_vertical|center_horizontal"
+				android:textSize="12sp"
+				android:textColor="@color/Black"
+				android:padding="5dp" >
+            </TextView>
         </TableRow>
         
 	</TableLayout>
