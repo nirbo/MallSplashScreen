@@ -2,7 +2,6 @@ package com.mediatech.mallprojectsplashscreen;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,12 +17,19 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.Animation.AnimationListener;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextSwitcher;
 import android.widget.TextView;
+import android.widget.ViewSwitcher.ViewFactory;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements ViewFactory {
 
 	private String LOGTAG = "MallSplashScreen";
 	
@@ -33,44 +39,73 @@ public class MainActivity extends Activity {
 	private Thread mCountDownThread;
 	private Boolean mCountDownThreadFinished = false;
 	
-	private TextView mInfoTextView;
+	private TextSwitcher mInfoTextSwitcher;
 	private ImageView mLogoImageView;
 	private Drawable mLogoImage;
 	private Bitmap mLogoBitmap;
 	private Bitmap mResizedLogoBitmap;
 	
-	private TextView messageTextView0;
-	private TextView messageTextView1;
-	private TextView messageTextView2;
-	private TextView messageTextView3;
-	private TextView messageTextView4;
+	private TextSwitcher messageTextSwitcher0;
+	private TextSwitcher messageTextSwitcher1;
+	private TextSwitcher messageTextSwitcher2;
+	private TextSwitcher messageTextSwitcher3;
+	private TextSwitcher messageTextSwitcher4;
 	
 	private GetMessagesAsyncTask mGetMessagesAsyncTask = new GetMessagesAsyncTask();
 	private List<String> mInfoTextsArrayList = new ArrayList<String>();
-	private List<TextView> mTextViewArrayList = new ArrayList<TextView>();
+	private List<TextSwitcher> mTextSwitcherArrayList = new ArrayList<TextSwitcher>();
+	private String mNextMessageToAdd = null;
+	private TextSwitcher mNextTextSwitcherToUse = null;
+	private Animation mFadeInAnimation;
+	private Animation mFadeOutAnimation;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.splash_screen_main);		
+		setContentView(R.layout.splash_screen_main);
+		
+		mFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+		mFadeOutAnimation  = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 		
 		mLogoImageView = (ImageView) findViewById(R.id.logoImageView);
 		mLogoBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cinemall_logo);
 		mLoadingCircle  = (ProgressBar) findViewById(R.id.loadingCircleProgressBar);
-		mInfoTextView = (TextView) findViewById(R.id.informationBarTextView);
+		mInfoTextSwitcher = (TextSwitcher) findViewById(R.id.informationBarTextSwitcher);
+		mInfoTextSwitcher.setFactory(this);
+		mInfoTextSwitcher.setInAnimation(mFadeInAnimation);
+		mInfoTextSwitcher.setOutAnimation(mFadeOutAnimation);
 		
-		messageTextView0 = (TextView) findViewById(R.id.messageTextView0);
-		mTextViewArrayList.add(messageTextView0);
-		messageTextView1 = (TextView) findViewById(R.id.messageTextView1);
-		mTextViewArrayList.add(messageTextView1);
-		messageTextView2 = (TextView) findViewById(R.id.messageTextView2);
-		mTextViewArrayList.add(messageTextView2);
-		messageTextView3 = (TextView) findViewById(R.id.messageTextView3);
-		mTextViewArrayList.add(messageTextView3);
-		messageTextView4 = (TextView) findViewById(R.id.messageTextView4);
-		mTextViewArrayList.add(messageTextView4);
+		messageTextSwitcher0 = (TextSwitcher) findViewById(R.id.messageTextSwitcher0);
+		messageTextSwitcher0.setFactory(this);
+		messageTextSwitcher0.setInAnimation(mFadeInAnimation);
+		messageTextSwitcher0.setOutAnimation(mFadeOutAnimation);
+		mTextSwitcherArrayList.add(messageTextSwitcher0);
+		
+		messageTextSwitcher1 = (TextSwitcher) findViewById(R.id.messageTextSwitcher1);
+		messageTextSwitcher1.setFactory(this);
+		messageTextSwitcher1.setInAnimation(mFadeInAnimation);
+		messageTextSwitcher1.setOutAnimation(mFadeOutAnimation);
+		mTextSwitcherArrayList.add(messageTextSwitcher1);
+		
+		messageTextSwitcher2 = (TextSwitcher) findViewById(R.id.messageTextSwitcher2);
+		messageTextSwitcher2.setFactory(this);
+		messageTextSwitcher2.setInAnimation(mFadeInAnimation);
+		messageTextSwitcher2.setOutAnimation(mFadeOutAnimation);
+		mTextSwitcherArrayList.add(messageTextSwitcher2);
+		
+		messageTextSwitcher3 = (TextSwitcher) findViewById(R.id.messageTextSwitcher3);
+		messageTextSwitcher3.setFactory(this);
+		messageTextSwitcher3.setInAnimation(mFadeInAnimation);
+		messageTextSwitcher3.setOutAnimation(mFadeOutAnimation);
+		mTextSwitcherArrayList.add(messageTextSwitcher3);
+		
+		messageTextSwitcher4 = (TextSwitcher) findViewById(R.id.messageTextSwitcher4);
+		messageTextSwitcher4.setFactory(this);
+		messageTextSwitcher4.setInAnimation(mFadeInAnimation);
+		messageTextSwitcher4.setOutAnimation(mFadeOutAnimation);
+		mTextSwitcherArrayList.add(messageTextSwitcher4);
 	}
-
+	
 	@Override
 	protected void onStart() {
 		super.onStart();
@@ -86,15 +121,7 @@ public class MainActivity extends Activity {
 		mCountDownHandler.post(mCountDownThread);
 		// ---------------------------------------------------------------
 		
-		// Execute the GetMessages AsyncTask
-//		try {
-//			mGetMessagesAsyncTask.execute();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			Log.e(LOGTAG, "ERROR: Could not retrieve splash-screen messages from the server; Splash messages will NOT be displayed!");
-//		}
-		// ---------------------------------------------------------------
-		
+		// Execute GetMessagesAsyncTask to get and display the splash screen messages
 		scheduleGetMessagesAsyncTask();
 	}
 	
@@ -102,6 +129,7 @@ public class MainActivity extends Activity {
 	protected void onPause() {
 		super.onPause();
 		
+		// Stop the CountDown Thread and GetMessages AsyncTask
 		mCountDownTimer.cancel();
 		mCountDownThreadFinished = true;
 	}
@@ -114,6 +142,19 @@ public class MainActivity extends Activity {
 		mCountDownTimer.cancel();
 		mCountDownThreadFinished = true;
 		this.finish();
+	}
+	
+	// ViewFactory implementation - creates the TextViews required to display the splash screen messages.
+	@Override
+	public View makeView() {
+		TextView mTextView = new TextView(this);
+		mTextView.setLayoutParams(new TextSwitcher.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT));
+		mTextView.setTextSize(16);
+		mTextView.setGravity(Gravity.CENTER);
+		mTextView.setTextColor(getResources().getColor(R.color.Black));
+		mTextView.setPadding(5, 5, 5, 5);
+		
+		return mTextView;
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -134,43 +175,8 @@ public class MainActivity extends Activity {
 		}
 	}
 	
-	// Get the splash messages from the server and display them in a rotation.
-	private void getSplashMessages() {
-				
-		String mNextMessageToDisplay = null;
-		TextView mNextTextViewToUse = null;
-			
-		int mMessagesCounter = 0;
-		int mTextViewCounter = 0;
-		int mMessagesArrayListSize = mInfoTextsArrayList.size();
-		int mTextViewArrayListSize = mTextViewArrayList.size();
-				
-		// Verify the messages ArrayList has been successfully populated and execute message-rotation logic.
-		mMessagesArrayListSize = mInfoTextsArrayList.size();
-		mTextViewArrayListSize = mTextViewArrayList.size();
-		
-		while (mTextViewCounter < 5) {
-			mMessagesCounter = mTextViewCounter;
-			
-			// Get new messages to display if all previously pulled messages have been displayed and the ArrayList is empty now.
-			if (mInfoTextsArrayList.isEmpty()) {
-				populateInfoTextArrayList(100);
-			}
-			
-			// Get next TextView to use and message contents and display them in the UI
-			mNextMessageToDisplay = mInfoTextsArrayList.get(mMessagesCounter);
-			mNextTextViewToUse = mTextViewArrayList.get(mTextViewCounter);
-			mNextTextViewToUse.setText(mNextMessageToDisplay);
-			
-			mInfoTextsArrayList.remove(mMessagesCounter);
-			mTextViewCounter++;
-			
-			// Debugging
-			Log.i(LOGTAG, "Next Message: " + mMessagesCounter +  " " + mInfoTextsArrayList.get(mMessagesCounter));
-		}
-	}
-	
-	// Random String Generator --- temporary for simulating the MessageTextView contents //
+	// Random String Generator --- temporary for simulating the MessageTextView contents
+	// TODO: Replace this random generator with actual SQL queries from the mall's database.
 	private static final String RANDOM_STRING_CHARACTERS ="0123456789qwertyuiopasdfghjklzxcvbnm ";
 		
 	private String getRandomString(final int sizeOfRandomString) {
@@ -182,7 +188,9 @@ public class MainActivity extends Activity {
 
 		return mRandomStringBuilder.toString();
 	}
-			
+	
+	// Populates the messages ArrayList, currently from a random String generator.
+	// TODO: Changes from the String random generator to pulling messages from the mall's SQL database.
 	public ArrayList<String> populateInfoTextArrayList(int amountOfEntries) {
 		ArrayList<String> mTempArrayList = new ArrayList<String>();
 		String mTempString;
@@ -195,12 +203,13 @@ public class MainActivity extends Activity {
 		return mTempArrayList;
 	}
 	
+	// This method is where the magic happens, it starts the AsyncTask that pulls the messages and performs their rotation every REPEAT_INTERVAL amount of milliseconds.
 	public void scheduleGetMessagesAsyncTask() {
 		final Handler mScheduleAsyncTaskHandler = new Handler();
 		Timer mTimer = new Timer();
 		final long REPEAT_INTERVAL = 7000;
+		
 		TimerTask executeAsyncTask = new TimerTask() {
-
 			@Override
 			public void run() {
 				mScheduleAsyncTaskHandler.post(new Runnable() {
@@ -220,10 +229,9 @@ public class MainActivity extends Activity {
 	}
 	
 	
-	
 /*  
     ------------------------------------------------	 
-	----- CountDown Thread Inner Class -----
+	--------- CountDown Thread Inner Class ---------
 	------------------------------------------------
 */
 	private class CountDownThread implements Runnable {
@@ -235,7 +243,7 @@ public class MainActivity extends Activity {
 		public void run() {
 			// Make the "Loading" circle visible and start the CountDown Timer
 			mLoadingCircle.setVisibility(View.VISIBLE);
-			mInfoTextView.setText(R.string.loading);
+			mInfoTextSwitcher.setText(getResources().getText(R.string.loading));
 			startCountDownTimer(mCountDownLength);
 		}
 		
@@ -253,7 +261,7 @@ public class MainActivity extends Activity {
 					
 					// Change text to display the count-down after a period of time
 					if (mCountDownTickRound < mCountDownToDisplay) {
-						mInfoTextView.setText(mCountDownTickRound + " " + getResources().getString(R.string.seconds_left));
+						mInfoTextSwitcher.setText(mCountDownTickRound + " " + getResources().getString(R.string.seconds_left));
 					}
 				}
 				
@@ -261,7 +269,7 @@ public class MainActivity extends Activity {
 				public void onFinish() {
 					// Hide the "Loading" circle and print "Done!" upon completion
 					mLoadingCircle.setVisibility(View.INVISIBLE);
-					mInfoTextView.setText(R.string.loading_complete);
+					mInfoTextSwitcher.setText(getResources().getText(R.string.loading_complete));
 					mCountDownThreadFinished = true;
 				}
 			}.
@@ -280,27 +288,55 @@ public class MainActivity extends Activity {
 	In a rotation on screen in the relevant TextViews.
 */
 
-	private class GetMessagesAsyncTask extends AsyncTask<Void, Void, Void> {
-
+	private class GetMessagesAsyncTask extends AsyncTask<Void, Void, List<String>> {
+		List<String> mTempFiveMessageList = new ArrayList<String>();
+		String mNextMessageToDisplay;
+		
 		@Override
-		protected Void doInBackground(Void... params) {
+		protected List<String> doInBackground(Void... params) {
 			
-			return null;
+			// Prepare 5 messages to be displayed and pass them to onPostExecute()
+			for (int mMessagesCounter = 0; mMessagesCounter < 5; mMessagesCounter++) {
+				
+				// Get new messages to display if all previously pulled messages have been displayed and the ArrayList is empty now.
+				if (mInfoTextsArrayList.isEmpty()) {
+					populateInfoTextArrayList(100);
+				}
+				
+				// Get the next TextSwitcher and message contents to display in the UI
+				mNextMessageToAdd = mInfoTextsArrayList.get(mMessagesCounter);
+				mTempFiveMessageList.add(mNextMessageToAdd);
+				
+				mInfoTextsArrayList.remove(mMessagesCounter);
+			}
+			
+			return mTempFiveMessageList;
 		}
 		
 		@Override
-		protected void onPostExecute(Void result) {
-			super.onPostExecute(result);
+		protected void onPostExecute(List<String> mFiveMessagesToDisplay) {
+			super.onPostExecute(mFiveMessagesToDisplay);
 			
-			getSplashMessages();
+			for (int mTextSwitcherCounter = 0; mTextSwitcherCounter < 5; mTextSwitcherCounter++) {
+				mNextTextSwitcherToUse = mTextSwitcherArrayList.get(mTextSwitcherCounter);
+				mNextMessageToDisplay = mFiveMessagesToDisplay.get(mTextSwitcherCounter);
+				
+				// Create a TextView in the ViewFactory and animate the text appearances and disappearances.
+				mNextTextSwitcherToUse.setText(mNextMessageToDisplay);
+				
+				// Put AsyncTask thread to sleep for 220ms in order to allow the TextSwitcher animations to fully complete.
+				// This sleep is important as it allows for smooth animation transitions - Do Not set the sleep time below 200ms!
+//				try {
+//					Thread.sleep(220);
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
+			}
 		}
 	}
 
 
-	
-	
-	
-	
+
 }
 
 
