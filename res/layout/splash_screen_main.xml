@@ -44,10 +44,10 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="center_vertical|center_horizontal"
-				android:textSize="14sp"
-				android:text="@string/placeholder1"
+				android:textSize="15sp"
 				android:textColor="@color/Black"
-				android:padding="5dp" >
+				android:padding="5dp"
+				android:scrollHorizontally="false" >
 			</TextView>
 			
                <TextView 
@@ -55,10 +55,10 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="center_vertical|center_horizontal"
-				android:textSize="14sp"
-				android:text="@string/placeholder2"
+				android:textSize="15sp"
 				android:textColor="@color/Black"
-				android:padding="5dp" >
+				android:padding="5dp"
+				android:scrollHorizontally="false" >
 			</TextView>
            
 			<TextView 
@@ -66,10 +66,10 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="center_vertical|center_horizontal"
-				android:textSize="14sp"
-				android:text="@string/placeholder3"
+				android:textSize="15sp"
 				android:textColor="@color/Black"
-				android:padding="5dp" >
+				android:padding="5dp"
+				android:scrollHorizontally="false" >
 			</TextView>
 
 			<TextView 
@@ -77,10 +77,10 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="center_vertical|center_horizontal"
-				android:textSize="14sp"
-				android:text="@string/placeholder4"
+				android:textSize="15sp"
 				android:textColor="@color/Black"
-				android:padding="5dp" >
+				android:padding="5dp"
+				android:scrollHorizontally="false" >
 			</TextView>
                	
 			<TextView 
@@ -88,10 +88,10 @@
                 android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="center_vertical|center_horizontal"
-				android:textSize="14sp"
-				android:text="@string/placeholder5"
+				android:textSize="15sp"
 				android:textColor="@color/Black"
-				android:padding="5dp" >
+				android:padding="5dp"
+				android:scrollHorizontally="false" >
 			</TextView>   
 		</LinearLayout>    
         
@@ -124,6 +124,7 @@
 				android:layout_height="wrap_content"
 				android:gravity="center_vertical|center_horizontal"
 				android:textSize="12sp"
+				android:textStyle="bold"
 				android:textColor="@color/Black"
 				android:padding="5dp" >
             </TextView>

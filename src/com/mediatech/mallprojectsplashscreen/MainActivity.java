@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
 	private Handler mCountDownHandler;
 	private Thread mCountDownThread;
 	private Boolean mCountDownThreadFinished = false;
-	
+
 	private TextView mInfoTextView;
 	private ImageView mLogoImageView;
 	private Drawable mLogoImage;
@@ -48,35 +48,30 @@ public class MainActivity extends Activity {
 	private TextView messageTextView4;
 	
 	private GetMessagesAsyncTask mGetMessagesAsyncTask = new GetMessagesAsyncTask();
-	private List<String> mInfoTextsArrayList = new ArrayList<String>();
-	private List<TextView> mTextViewArrayList = new ArrayList<TextView>();
+	private List<String> mInfoTextsArrayList;
+	private List<TextView> mTextViewArrayList;
 	private String mNextMessageToAdd;
 	private String mNextMessageToDisplay;
 	private TextView mNextTextViewToUse;
 	private Animation mFadeInAnimation;
 	private Animation mFadeOutAnimation;
-	
-	private AnimationListener mFadeOutAnimListener = new AnimationListener() {
-		public void onAnimationStart(Animation animation) {}
-		public void onAnimationRepeat(Animation animation) {}
-		public void onAnimationEnd(Animation animation) {
-			mNextTextViewToUse.setVisibility(View.INVISIBLE);
-			mNextTextViewToUse.setText(mNextMessageToDisplay);
-			mNextTextViewToUse.setVisibility(View.VISIBLE);
-			mNextTextViewToUse.startAnimation(mFadeInAnimation);
-			
-			Log.i(LOGTAG, "Next TextView Number: " + mNextTextViewToUse);
-		}
-	};
-	
+	private Handler mMessageDisplayRepeatHandler;
+	private List<String> mFiveMessages;
+	private int mCurrentMessageIndex = 0;
+	private Boolean mStopMessageDisplayRepeat = false;
+	 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash_screen_main);
 		
+		mInfoTextsArrayList = new ArrayList<String>();
+		mTextViewArrayList = new ArrayList<TextView>();
+		
 		mFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
 		mFadeOutAnimation  = AnimationUtils.loadAnimation(this, R.anim.fade_out);
 		mFadeOutAnimation.setAnimationListener(mFadeOutAnimListener);
+		mMessageDisplayRepeatHandler = new Handler();
 		
 		mLogoImageView = (ImageView) findViewById(R.id.logoImageView);
 		mLogoBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cinemall_logo);
@@ -85,16 +80,12 @@ public class MainActivity extends Activity {
 		
 		messageTextView0 = (TextView) findViewById(R.id.messageTextView0);
 		mTextViewArrayList.add(messageTextView0);
-		
 		messageTextView1 = (TextView) findViewById(R.id.messageTextView1);
 		mTextViewArrayList.add(messageTextView1);
-		
 		messageTextView2 = (TextView) findViewById(R.id.messageTextView2);
 		mTextViewArrayList.add(messageTextView2);
-		
 		messageTextView3 = (TextView) findViewById(R.id.messageTextView3);
 		mTextViewArrayList.add(messageTextView3);
-		
 		messageTextView4 = (TextView) findViewById(R.id.messageTextView4);
 		mTextViewArrayList.add(messageTextView4);
 	}
@@ -187,7 +178,7 @@ public class MainActivity extends Activity {
 	public void scheduleGetMessagesAsyncTask() {
 		final Handler mScheduleAsyncTaskHandler = new Handler();
 		Timer mTimer = new Timer();
-		final long REPEAT_INTERVAL = 7000;
+		final long RESCHEDULE_INTERVAL = 7000;
 		
 		TimerTask executeAsyncTask = new TimerTask() {
 			@Override
@@ -206,8 +197,55 @@ public class MainActivity extends Activity {
 			}
 		};
 		
-		mTimer.schedule(executeAsyncTask, 0, REPEAT_INTERVAL);
+		mTimer.schedule(executeAsyncTask, 0, RESCHEDULE_INTERVAL);
 	}
+	
+	public AnimationListener mFadeOutAnimListener = new AnimationListener() {
+		public void onAnimationStart(Animation animation) {}
+		public void onAnimationRepeat(Animation animation) {}
+		public void onAnimationEnd(Animation animation) {
+			mNextTextViewToUse.setVisibility(View.INVISIBLE);
+			mNextTextViewToUse.setText(mNextMessageToDisplay);
+			mNextTextViewToUse.setVisibility(View.VISIBLE);
+			mNextTextViewToUse.startAnimation(mFadeInAnimation);
+		}
+	};
+	
+	// Get the next message and next TextView to use and animate the change of text from the previously displayed to the new.
+	public void updateTextView(List<String> mMessages) {
+		mNextTextViewToUse = mTextViewArrayList.get(mCurrentMessageIndex);
+		mNextMessageToDisplay = mMessages.get(mCurrentMessageIndex);
+		
+		mNextTextViewToUse.startAnimation(mFadeOutAnimation);
+		if (mCurrentMessageIndex == 4) {
+			mStopMessageDisplayRepeat = true;
+		} else {
+			mCurrentMessageIndex++;
+		}
+	}
+	
+	// This Runnable is in charge of displaying the batches of 5 messages at a time.
+	public Runnable mUpdateTextViewRunnable = new Runnable() {
+		final static int POSTDELAY_INTERVAL = 600;
+		
+		@Override
+		public void run() {
+			updateTextView(mFiveMessages);
+			if (! mStopMessageDisplayRepeat) {
+				mMessageDisplayRepeatHandler.postDelayed(mUpdateTextViewRunnable, POSTDELAY_INTERVAL);
+			}
+		}
+	};
+	
+	// This method calls a recursive repeat of the mUpdateTextViewRunnable Runnable 
+	// and stops when all 5 messages in the batch have been displayed.
+	public void startTextViewRunnableRepeat() {
+		mUpdateTextViewRunnable.run();
+	}
+	
+	
+	
+	
 	
 	
 /*  
@@ -260,6 +298,10 @@ public class MainActivity extends Activity {
 	}	
 	
 	
+	
+	
+	
+	
 /*  
     ------------------------------------------------	 
 	----- Splash Message AsyncTask Inner Class -----
@@ -274,9 +316,13 @@ public class MainActivity extends Activity {
 		
 		@Override
 		protected List<String> doInBackground(Void... params) {
+			// Reset the mStopMessageDisplayRepeat boolean flag and the mCurrentMessageIndex global counter back to false and 0 
+			// to allow the recursive repeat of messages display with animation can be performed on the next batch of messages.
+			mCurrentMessageIndex = 0;
+			mStopMessageDisplayRepeat = false;
 			
 			// Prepare 5 messages to be displayed and pass them to onPostExecute()
-			for (int mMessagesCounter = 0; mMessagesCounter < 5; mMessagesCounter++) {
+			for (int mIndexCounter = 0; mIndexCounter < 5; mIndexCounter++) {
 				
 				// Get new messages to display if all previously pulled messages have been displayed and the ArrayList is empty now.
 				if (mInfoTextsArrayList.isEmpty()) {
@@ -284,10 +330,9 @@ public class MainActivity extends Activity {
 				}
 				
 				// Get the next TextView and message contents to display in the UI
-				mNextMessageToAdd = mInfoTextsArrayList.get(mMessagesCounter);
+				mNextMessageToAdd = mInfoTextsArrayList.get(mIndexCounter);
 				mTempFiveMessageList.add(mNextMessageToAdd);
-				
-				mInfoTextsArrayList.remove(mMessagesCounter);
+				mInfoTextsArrayList.remove(mIndexCounter);
 			}
 			
 			return mTempFiveMessageList;
@@ -296,17 +341,11 @@ public class MainActivity extends Activity {
 		@Override
 		protected void onPostExecute(List<String> mFiveMessagesToDisplay) {
 			super.onPostExecute(mFiveMessagesToDisplay);
-					
-			for (int mTextViewCounter = 0; mTextViewCounter < 5; mTextViewCounter++) {
-				mNextTextViewToUse = mTextViewArrayList.get(mTextViewCounter);
-				mNextMessageToDisplay = mFiveMessagesToDisplay.get(mTextViewCounter);
-				
-				// Post and animate the message changes in the TextView
-				mNextTextViewToUse.startAnimation(mFadeOutAnimation);
-			}
-		}
+			
+			mFiveMessages = mFiveMessagesToDisplay;	
+			startTextViewRunnableRepeat();
+		}		
 	}
-
 
 
 }
