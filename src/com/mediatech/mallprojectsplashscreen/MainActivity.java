@@ -131,8 +131,8 @@ public class MainActivity extends Activity {
 	@SuppressWarnings("deprecation")
 	@SuppressLint("NewApi")
 	public void prepareSplashLogoImage() {		
-		mResizedLogoBitmap = Bitmap.createScaledBitmap(mLogoBitmap, 2580, 980, false); // Base Width,Height: 420,140
-		mLogoImage = new BitmapDrawable(mResizedLogoBitmap);
+//		mResizedLogoBitmap = Bitmap.createScaledBitmap(mLogoBitmap, 2580, 980, false); // Base Width,Height: 420,140
+//		mLogoImage = new BitmapDrawable(mResizedLogoBitmap);
 		
 		// Get the Android SDK Version and set the Drawable into the ImageView
 		// using a newer, non-deprecated method if the SDK is JellyBean or later.
@@ -140,9 +140,11 @@ public class MainActivity extends Activity {
 		Log.i(LOGTAG, "Android SDK version detected: " + mAndroidVersion.toString());
 		
 		if (mAndroidVersion < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-			mLogoImageView.setBackgroundDrawable(mLogoImage);
+//			mLogoImageView.setBackgroundDrawable(mLogoImage);
+			mLogoImageView.setImageResource(R.drawable.cinemall_logo);
 		} else {
-			mLogoImageView.setBackground(mLogoImage);
+//			mLogoImageView.setBackground(mLogoImage);
+			mLogoImageView.setImageResource(R.drawable.cinemall_logo);
 		}
 	}
 	
