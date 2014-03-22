@@ -46,9 +46,9 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="center_vertical|center_horizontal"
-				android:textSize="15sp"
+				android:textSize="18sp"
 				android:textColor="@color/Black"
-				android:padding="5dp"
+				android:padding="15dp"
 				android:scrollHorizontally="false" >
 			</TextView>
 			
@@ -57,9 +57,9 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="center_vertical|center_horizontal"
-				android:textSize="15sp"
+				android:textSize="18sp"
 				android:textColor="@color/Black"
-				android:padding="5dp"
+				android:padding="15dp"
 				android:scrollHorizontally="false" >
 			</TextView>
            
@@ -68,9 +68,9 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="center_vertical|center_horizontal"
-				android:textSize="15sp"
+				android:textSize="18sp"
 				android:textColor="@color/Black"
-				android:padding="5dp"
+				android:padding="15dp"
 				android:scrollHorizontally="false" >
 			</TextView>
 
@@ -79,9 +79,9 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="center_vertical|center_horizontal"
-				android:textSize="15sp"
+				android:textSize="18sp"
 				android:textColor="@color/Black"
-				android:padding="5dp"
+				android:padding="15dp"
 				android:scrollHorizontally="false" >
 			</TextView>
                	
@@ -90,9 +90,9 @@
                 android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="center_vertical|center_horizontal"
-				android:textSize="15sp"
+				android:textSize="18sp"
 				android:textColor="@color/Black"
-				android:padding="5dp"
+				android:padding="15dp"
 				android:scrollHorizontally="false" >
 			</TextView>   
 		</LinearLayout>    
