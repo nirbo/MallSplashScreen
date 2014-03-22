@@ -120,7 +120,7 @@ public class MainActivity extends Activity {
 	
 	// Populate the splash screen Cinemall logo ImageView
 	public void prepareSplashLogoImage() {		
-		mLogoImageView.setImageResource(R.drawable.cinemall_logo_highres);
+		mLogoImageView.setImageResource(R.drawable.cinemall_logo);
 	}
 	
 	// Random String Generator --- temporary for simulating the MessageTextView contents
