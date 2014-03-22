@@ -6,17 +6,11 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -37,9 +31,6 @@ public class MainActivity extends Activity {
 
 	private TextView mInfoTextView;
 	private ImageView mLogoImageView;
-	private Drawable mLogoImage;
-	private Bitmap mLogoBitmap;
-	private Bitmap mResizedLogoBitmap;
 	
 	private TextView messageTextView0;
 	private TextView messageTextView1;
@@ -74,7 +65,6 @@ public class MainActivity extends Activity {
 		mMessageDisplayRepeatHandler = new Handler();
 		
 		mLogoImageView = (ImageView) findViewById(R.id.logoImageView);
-		mLogoBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cinemall_logo);
 		mLoadingCircle  = (ProgressBar) findViewById(R.id.loadingCircleProgressBar);
 		mInfoTextView = (TextView) findViewById(R.id.informationBarTextView);
 		
@@ -128,24 +118,9 @@ public class MainActivity extends Activity {
 		this.finish();
 	}
 	
-	@SuppressWarnings("deprecation")
-	@SuppressLint("NewApi")
+	// Populate the splash screen Cinemall logo ImageView
 	public void prepareSplashLogoImage() {		
-//		mResizedLogoBitmap = Bitmap.createScaledBitmap(mLogoBitmap, 2580, 980, false); // Base Width,Height: 420,140
-//		mLogoImage = new BitmapDrawable(mResizedLogoBitmap);
-		
-		// Get the Android SDK Version and set the Drawable into the ImageView
-		// using a newer, non-deprecated method if the SDK is JellyBean or later.
-		Integer mAndroidVersion = android.os.Build.VERSION.SDK_INT;
-		Log.i(LOGTAG, "Android SDK version detected: " + mAndroidVersion.toString());
-		
-		if (mAndroidVersion < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-//			mLogoImageView.setBackgroundDrawable(mLogoImage);
-			mLogoImageView.setImageResource(R.drawable.cinemall_logo);
-		} else {
-//			mLogoImageView.setBackground(mLogoImage);
-			mLogoImageView.setImageResource(R.drawable.cinemall_logo);
-		}
+		mLogoImageView.setImageResource(R.drawable.cinemall_logo_new);
 	}
 	
 	// Random String Generator --- temporary for simulating the MessageTextView contents
