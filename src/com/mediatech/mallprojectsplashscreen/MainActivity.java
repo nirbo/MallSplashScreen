@@ -125,7 +125,8 @@ public class MainActivity extends Activity {
 	
 	// Random String Generator --- temporary for simulating the MessageTextView contents
 	// TODO: Replace this random generator with actual SQL queries from the mall's database.
-	private static final String RANDOM_STRING_CHARACTERS ="0123456789qwertyuiopasdfghjklzxcvbnm ";
+//	private static final String RANDOM_STRING_CHARACTERS ="0123456789qwertyuiopasdfghjklzxcvbnm ";
+	private static final String RANDOM_STRING_CHARACTERS ="0123456789אבגדהוזחטיכלמנסעפצקרשת ";
 		
 	private String getRandomString(final int sizeOfRandomString) {
 		final Random mRandomGenerator = new Random();
@@ -144,7 +145,7 @@ public class MainActivity extends Activity {
 		String mTempString;
 		
 		while (mTempArrayList.size() < amountOfEntries) {
-			mTempString = getRandomString(125);
+			mTempString = getRandomString(20);
 			mTempArrayList.add(mTempString);
 		}
 		
