@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
 	private CountDownTimer mCountDownTimer;
 	private Handler mCountDownHandler;
 	private Thread mCountDownThread;
-	private Boolean mCountDownThreadFinished = false;
+	private Boolean mCountDownThreadFinished;
 
 	private TextView mInfoTextView;
 	private ImageView mLogoImageView;
@@ -90,6 +90,7 @@ public class MainActivity extends Activity {
 		getActionBar().hide();
 		prepareSplashLogoImage();
 		mInfoTextsArrayList = populateInfoTextArrayList(100);
+		mCountDownThreadFinished = false;
 		
 		// Instantiate the Handler and the Thread then execute the thread.
 		mCountDownHandler = new Handler();
@@ -116,13 +117,7 @@ public class MainActivity extends Activity {
 		// Stop the CountDown Thread and GetMessages AsyncTask
 		mCountDownTimer.cancel();
 		mCountDownThreadFinished = true;
-	}
-	
-	@Override
-	public void finish() {
-		super.finish();
-		
-		overridePendingTransition(0, R.anim.collapse_to_middle);
+		this.finish();
 	}
 	
 	@Override
@@ -133,6 +128,13 @@ public class MainActivity extends Activity {
 		mCountDownTimer.cancel();
 		mCountDownThreadFinished = true;
 		this.finish();
+	}
+
+	@Override
+	public void finish() {
+		super.finish();
+		
+		overridePendingTransition(0, R.anim.collapse_to_middle);
 	}
 	
 	// Populate the splash screen Cinemall logo ImageView
