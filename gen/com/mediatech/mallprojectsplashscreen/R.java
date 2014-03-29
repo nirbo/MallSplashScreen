@@ -9,8 +9,10 @@ package com.mediatech.mallprojectsplashscreen;
 
 public final class R {
     public static final class anim {
-        public static final int fade_in=0x7f040000;
-        public static final int fade_out=0x7f040001;
+        public static final int appear_from_middle=0x7f040000;
+        public static final int collapse_to_middle=0x7f040001;
+        public static final int fade_in=0x7f040002;
+        public static final int fade_out=0x7f040003;
     }
     public static final class attr {
     }
@@ -172,25 +174,31 @@ public final class R {
     public static final class drawable {
         public static final int cinemall_logo_highres=0x7f020000;
         public static final int ic_launcher=0x7f020001;
+        public static final int opening_1280x800=0x7f020002;
+        public static final int under_construction=0x7f020003;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a000d;
-        public static final int informationBarTableRow=0x7f0a000b;
-        public static final int informationBarTextView=0x7f0a000c;
-        public static final int loadingCircleProgressBar=0x7f0a000a;
-        public static final int loadingCircleTableRow=0x7f0a0009;
-        public static final int logoImageView=0x7f0a0002;
-        public static final int logoTableRow=0x7f0a0001;
-        public static final int mainTableLayout=0x7f0a0000;
-        public static final int messageTextView0=0x7f0a0004;
-        public static final int messageTextView1=0x7f0a0005;
-        public static final int messageTextView2=0x7f0a0006;
-        public static final int messageTextView3=0x7f0a0007;
-        public static final int messageTextView4=0x7f0a0008;
-        public static final int messagesInnerLinearLayout=0x7f0a0003;
+        public static final int action_settings=0x7f0a000f;
+        public static final int informationBarTableRow=0x7f0a000d;
+        public static final int informationBarTextView=0x7f0a000e;
+        public static final int loadingCircleProgressBar=0x7f0a000c;
+        public static final int loadingCircleTableRow=0x7f0a000b;
+        public static final int logoImageView=0x7f0a0004;
+        public static final int logoTableRow=0x7f0a0003;
+        public static final int mainTableLayout=0x7f0a0002;
+        public static final int messageTextView0=0x7f0a0006;
+        public static final int messageTextView1=0x7f0a0007;
+        public static final int messageTextView2=0x7f0a0008;
+        public static final int messageTextView3=0x7f0a0009;
+        public static final int messageTextView4=0x7f0a000a;
+        public static final int messagesInnerLinearLayout=0x7f0a0005;
+        public static final int opening_imageview=0x7f0a0001;
+        public static final int placeholder_image=0x7f0a0000;
     }
     public static final class layout {
-        public static final int splash_screen_main=0x7f030000;
+        public static final int mall_app_placeholder=0x7f030000;
+        public static final int opening_imageview=0x7f030001;
+        public static final int splash_screen_main=0x7f030002;
     }
     public static final class menu {
         public static final int main=0x7f090000;

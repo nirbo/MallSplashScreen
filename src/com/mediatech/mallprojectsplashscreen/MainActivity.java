@@ -7,6 +7,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -55,6 +56,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash_screen_main);
+		overridePendingTransition(R.anim.appear_from_middle, R.anim.collapse_to_middle);
 		
 		mInfoTextsArrayList = new ArrayList<String>();
 		mTextViewArrayList = new ArrayList<TextView>();
@@ -96,7 +98,15 @@ public class MainActivity extends Activity {
 		// ---------------------------------------------------------------
 		
 		// Execute GetMessagesAsyncTask to get and display the splash screen messages
-		scheduleGetMessagesAsyncTask();
+		// Short delay included to allow the Activity transition animation to finish.
+		Handler mDelay = new Handler();
+		mDelay.postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				scheduleGetMessagesAsyncTask();
+			}
+		}, 650);
 	}
 	
 	@Override
@@ -106,6 +116,13 @@ public class MainActivity extends Activity {
 		// Stop the CountDown Thread and GetMessages AsyncTask
 		mCountDownTimer.cancel();
 		mCountDownThreadFinished = true;
+	}
+	
+	@Override
+	public void finish() {
+		super.finish();
+		
+		overridePendingTransition(0, R.anim.collapse_to_middle);
 	}
 	
 	@Override
@@ -221,7 +238,9 @@ public class MainActivity extends Activity {
 		mUpdateTextViewRunnable.run();
 	}
 	
-	
+	private void finishMainActivity() {
+		this.finish();
+	}
 	
 	
 	
@@ -268,11 +287,21 @@ public class MainActivity extends Activity {
 					mLoadingCircle.setVisibility(View.INVISIBLE);
 					mInfoTextView.setText(getResources().getText(R.string.loading_complete));
 					mCountDownThreadFinished = true;
+					
+					Handler mDelay = new Handler();
+					mDelay.postDelayed(new Runnable() {
+						
+						@Override
+						public void run() {
+							Intent mPlaceholderActivity = new Intent(getApplicationContext(), MallAppPlaceholder.class);
+							startActivity(mPlaceholderActivity);
+							finishMainActivity();
+						}
+					}, 2000);
 				}
 			}.
 			start();
 		}
-		
 	}	
 	
 	
