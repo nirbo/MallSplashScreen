@@ -178,41 +178,31 @@ public final class R {
         public static final int under_construction=0x7f020003;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a000f;
-        public static final int informationBarTableRow=0x7f0a000d;
-        public static final int informationBarTextView=0x7f0a000e;
-        public static final int loadingCircleProgressBar=0x7f0a000c;
-        public static final int loadingCircleTableRow=0x7f0a000b;
-        public static final int logoImageView=0x7f0a0004;
-        public static final int logoTableRow=0x7f0a0003;
-        public static final int mainTableLayout=0x7f0a0002;
-        public static final int messageTextView0=0x7f0a0006;
-        public static final int messageTextView1=0x7f0a0007;
-        public static final int messageTextView2=0x7f0a0008;
-        public static final int messageTextView3=0x7f0a0009;
-        public static final int messageTextView4=0x7f0a000a;
-        public static final int messagesInnerLinearLayout=0x7f0a0005;
-        public static final int opening_imageview=0x7f0a0001;
-        public static final int placeholder_image=0x7f0a0000;
+        public static final int informationBarTableRow=0x7f09000d;
+        public static final int informationBarTextView=0x7f09000e;
+        public static final int loadingCircleProgressBar=0x7f09000c;
+        public static final int loadingCircleTableRow=0x7f09000b;
+        public static final int logoImageView=0x7f090004;
+        public static final int logoTableRow=0x7f090003;
+        public static final int mainTableLayout=0x7f090002;
+        public static final int messageTextView0=0x7f090006;
+        public static final int messageTextView1=0x7f090007;
+        public static final int messageTextView2=0x7f090008;
+        public static final int messageTextView3=0x7f090009;
+        public static final int messageTextView4=0x7f09000a;
+        public static final int messagesInnerLinearLayout=0x7f090005;
+        public static final int opening_imageview=0x7f090001;
+        public static final int placeholder_image=0x7f090000;
     }
     public static final class layout {
         public static final int mall_app_placeholder=0x7f030000;
         public static final int opening_imageview=0x7f030001;
         public static final int splash_screen_main=0x7f030002;
     }
-    public static final class menu {
-        public static final int main=0x7f090000;
-    }
     public static final class string {
-        public static final int action_settings=0x7f070009;
         public static final int app_name=0x7f070000;
         public static final int loading=0x7f070001;
         public static final int loading_complete=0x7f070003;
-        public static final int placeholder1=0x7f070004;
-        public static final int placeholder2=0x7f070005;
-        public static final int placeholder3=0x7f070006;
-        public static final int placeholder4=0x7f070007;
-        public static final int placeholder5=0x7f070008;
         public static final int seconds_left=0x7f070002;
     }
     public static final class style {

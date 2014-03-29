@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MallProjectSplashScreen</string>
-    <string name="loading">Loading, please wait...</string>
-    <string name="seconds_left">seconds left...</string>
-    <string name="loading_complete">Done!</string>
-    
-    <string name="placeholder1">Placeholder 1</string>
-    <string name="placeholder2">Placeholder 2</string>
-    <string name="placeholder3">Placeholder 3</string>
-    <string name="placeholder4">Placeholder 4</string>
-    <string name="placeholder5">Placeholder 5</string>
-    
-    
-    
-    <string name="action_settings">Settings</string>
+    <string name="app_name">סינמול - מסך פתיחה</string>
+    <string name="loading">טוען, אנא המתן...</string>
+    <string name="seconds_left">שניות נותרו...</string>
+    <string name="loading_complete">הטעינה הסתיימה!</string>
     
 </resources>
