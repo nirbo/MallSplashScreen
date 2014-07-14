@@ -21,8 +21,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
-
-	private String LOGTAG = "MallSplashScreen";
 	
 	private ProgressBar mLoadingCircle;
 	private CountDownTimer mCountDownTimer;
