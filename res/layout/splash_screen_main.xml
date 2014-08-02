@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity"
-    android:background="@color/SplashBackground" >
+    android:background="@color/Black" >
 
     <TableLayout
         android:id="@+id/mainTableLayout"
@@ -37,64 +37,58 @@
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:orientation="vertical"
-			android:background="@color/SplashMessageBackground"
+			android:background="@android:color/transparent"
 			android:gravity="center_vertical|center_horizontal"
 			android:layout_weight="1" >
 			
-			<TextView 
-				android:id="@+id/messageTextView0"
-				android:layout_width="wrap_content"
+			<TextSwitcher 
+				android:id="@+id/textSwitcher0"
+				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:gravity="center_vertical|center_horizontal"
-				android:textSize="18sp"
-				android:textColor="@color/Black"
+				android:background="@drawable/splash_message_textview_background"
 				android:padding="15dp"
-				android:scrollHorizontally="false" >
-			</TextView>
+				android:scrollHorizontally="false"
+				android:layout_marginBottom="1dp" >
+			</TextSwitcher>
 			
-               <TextView 
-				android:id="@+id/messageTextView1"
-				android:layout_width="wrap_content"
+			<TextSwitcher 
+				android:id="@+id/textSwitcher1"
+				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:gravity="center_vertical|center_horizontal"
-				android:textSize="18sp"
-				android:textColor="@color/Black"
+				android:background="@drawable/splash_message_textview_background"
 				android:padding="15dp"
-				android:scrollHorizontally="false" >
-			</TextView>
+				android:scrollHorizontally="false"
+				android:layout_marginBottom="1dp" >
+			</TextSwitcher>
            
-			<TextView 
-				android:id="@+id/messageTextView2"
-				android:layout_width="wrap_content"
+			<TextSwitcher 
+				android:id="@+id/textSwitcher2"
+				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:gravity="center_vertical|center_horizontal"
-				android:textSize="18sp"
-				android:textColor="@color/Black"
+				android:background="@drawable/splash_message_textview_background"
 				android:padding="15dp"
-				android:scrollHorizontally="false" >
-			</TextView>
+				android:scrollHorizontally="false"
+				android:layout_marginBottom="1dp" >
+			</TextSwitcher>
 
-			<TextView 
-				android:id="@+id/messageTextView3"
-				android:layout_width="wrap_content"
+			<TextSwitcher 
+				android:id="@+id/textSwitcher3"
+				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:gravity="center_vertical|center_horizontal"
-				android:textSize="18sp"
-				android:textColor="@color/Black"
+				android:background="@drawable/splash_message_textview_background"
 				android:padding="15dp"
-				android:scrollHorizontally="false" >
-			</TextView>
+				android:scrollHorizontally="false"
+				android:layout_marginBottom="1dp" >
+			</TextSwitcher>
                	
-			<TextView 
-                android:id="@+id/messageTextView4"
-                android:layout_width="wrap_content"
+			<TextSwitcher 
+                android:id="@+id/textSwitcher4"
+                android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:gravity="center_vertical|center_horizontal"
-				android:textSize="18sp"
-				android:textColor="@color/Black"
+				android:background="@drawable/splash_message_textview_background"
 				android:padding="15dp"
 				android:scrollHorizontally="false" >
-			</TextView>   
+			</TextSwitcher>   
 		</LinearLayout>    
         
         <TableRow 
@@ -127,7 +121,11 @@
 				android:gravity="center_vertical|center_horizontal"
 				android:textSize="12sp"
 				android:textStyle="bold"
-				android:textColor="@color/Black"
+				android:textColor="@color/White"
+				android:shadowColor="@color/Black"
+		        android:shadowDx="-5"
+		        android:shadowDy="-5"
+		        android:shadowRadius="5"
 				android:padding="5dp" >
             </TextView>
         </TableRow>

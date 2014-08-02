@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
      <color name="SplashBackground">#93C4D3</color>
-     <color name="SplashMessageBackground">#B2B2B2</color>
+     <color name="SplashMessageBackground">#1155AA</color>
+     <color name="SplashMessageTextViewBorder">#2575AA</color>
+     <color name="SplashMessageTextColor">#5CB3FF</color>
+     <color name="SplashMessageShadowColor">#2575AA</color>
      
      <color name="ICSBlue">#33B5E5</color>
 	 <color name="White">#FFFFFF</color>
